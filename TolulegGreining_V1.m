@@ -5,7 +5,9 @@ clc
 % Lidur 1 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Vid skilgreindum fallid f_af_theta sem tekur inn eftirfarandi breytur i %
-% rettri rod. Fallid skilar gildum F,x og y (skyrt i verkskyrslu).        %
+% rettri rod:                                                             %
+% p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma                                  %
+% Fallid skilar gildum F,x og y (skyrt i verkskyrslu).                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 disp(' ')
 disp('Lidur 1:')
@@ -19,6 +21,12 @@ x1 = 4; y1 = 0; x2 = 0; y2 = 4;
 
 gamma = pi/2;
 
+disp('Ef allt gengur a� �skum �ttu n�stu tv�r ni�urst��ur a� vera 0')
+theta = - pi/4;
+disp(strcat('f(-pi/4) =  ', num2str(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma))))
+theta = pi/4;
+disp(strcat('f(pi/4) =  ',num2str(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma))))
+
 % Lidur 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 disp(' ')
@@ -29,7 +37,7 @@ disp(' ')
 
 syms theta;
 figure(1)
-fplot(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma),[-pi,pi])
+ezplot(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma),[-pi,pi])
 clear theta
 
 % Lidur 3
@@ -102,7 +110,7 @@ gamma = pi/4;
 syms theta;
 [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 figure(3);
-fplot(f,[-pi,pi])
+ezplot(f,[-pi,pi])
 
 
 % Skrifum litid rotaleitarforrit:
@@ -219,21 +227,17 @@ set(gca, 'box', 'off')
 [d_test_p1 d_test_p2 d_test_p3] = test_p(x,y,L1,L2,L3,x1,x2,y2,theta,gamma);
 
 
-disp('Fyrir θ = '+ string(raetur(1)) + ' Faum vid:') 
-disp('p1 = ' + string(a_test_p1) + ', p2 = ' + string(a_test_p2) +...
-    ' og p3 = ' + string(a_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur(1)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(a_test_p1), ', p2 = ', num2str(a_test_p2),' og p3 = ', num2str(a_test_p3)))
 disp(' ')
-disp('Fyrir θ = '+ string(raetur(2)) + ' Faum vid:') 
-disp('p1 = ' + string(b_test_p1) + ', p2 = ' + string(b_test_p2) +...
-    ' og p3 = ' + string(b_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur(2)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(b_test_p1), ', p2 = ', num2str(b_test_p2), ' og p3 = ', num2str(b_test_p3)))
 disp(' ')
-disp('Fyrir θ = '+ string(raetur(3)) + ' Faum vid:') 
-disp('p1 = ' + string(c_test_p1) + ', p2 = ' + string(c_test_p2) +...
-    ' og p3 = ' + string(c_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur(3)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(c_test_p1), ', p2 = ', num2str(c_test_p2), ' og p3 = ', num2str(c_test_p3)))
 disp(' ')
-disp('Fyrir θ = '+ string(raetur(4)) + ' Faum vid:') 
-disp('p1 = ' + string(d_test_p1) + ', p2 = ' + string(d_test_p2) +...
-    ' og p3 = ' + string(d_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur(4)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(d_test_p1), ', p2 = ', num2str(d_test_p2), ' og p3 = ', num2str(d_test_p3)))
 disp(' ')
 
 % Lidur 5
@@ -248,7 +252,7 @@ p2 = 7;
 syms theta;
 [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 figure(5);
-fplot(f,[-pi,pi])
+ezplot(f,[-pi,pi])
 
 
 % Skrifum litid rotaleitarforrit:
@@ -258,7 +262,7 @@ fplot(f,[-pi,pi])
 rotabil = [-1 -0.5;-0.38 -0.35;0 0.1;0.4 0.5;0.96 1;2.5 2.55];
 raetur5 = [];
 for k = 1:6
-   raetur5(k) = vpasolve(f,theta,rotabil(k));   
+   raetur5(k) = vpasolve(f,theta,rotabil(k));
 end
 
 %----------------------------------------------------%
@@ -415,52 +419,21 @@ disp('Lidur 6:')
 disp('--------------------------------')
 disp(' ')
 
-disp('Fyrir θ = '+ string(raetur5(1)) + ' Faum vid:') 
-disp('p1 = ' + string(a_test_p1) + ', p2 = ' + string(a_test_p2) +...
-    ' og p3 = ' + string(a_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur5(1)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(a_test_p1) + ', p2 = ', num2str(a_test_p2), ' og p3 = ', num2str(a_test_p3)))
 disp(' ')
-disp('Fyrir θ = '+ string(raetur5(2)) + ' Faum vid:') 
-disp('p1 = ' + string(b_test_p1) + ', p2 = ' + string(b_test_p2) +...
-    ' og p3 = ' + string(b_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur5(2)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(b_test_p1) + ', p2 = ', num2str(b_test_p2), ' og p3 = ', num2str(b_test_p3)))
 disp(' ')
-disp('Fyrir θ = '+ string(raetur5(3)) + ' Faum vid:') 
-disp('p1 = ' + string(c_test_p1) + ', p2 = ' + string(c_test_p2) +...
-    ' og p3 = ' + string(c_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur5(3)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(c_test_p1), ', p2 = ', num2str(c_test_p2), ' og p3 = ', num2str(c_test_p3)))
 disp(' ')
-disp('Fyrir θ = '+ string(raetur5(4)) + ' Faum vid:') 
-disp('p1 = ' + string(d_test_p1) + ', p2 = ' + string(d_test_p2) +...
-    ' og p3 = ' + string(d_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur5(4)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(d_test_p1), ', p2 = ', num2str(d_test_p2), ' og p3 = ', num2str(d_test_p3)))
 disp(' ')
-disp('Fyrir θ = '+ string(raetur5(5)) + ' Faum vid:') 
-disp('p1 = ' + string(e_test_p1) + ', p2 = ' + string(e_test_p2) +...
-    ' og p3 = ' + string(e_test_p3))
+disp(strcat('Fyrir θ = ', num2str(raetur5(5)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(e_test_p1), ', p2 = ' + num2str(e_test_p2), ' og p3 = ', num2str(e_test_p3)))
 disp(' ')
-disp('Fyrir θ = '+ string(raetur5(6)) + ' Faum vid:') 
-disp('p1 = ' + string(f_test_p1) + ', p2 = ' + string(f_test_p2) +...
-    ' og p3 = ' + string(f_test_p3))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+disp(strcat('Fyrir θ = ', num2str(raetur5(6)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(f_test_p1), ', p2 = ', num2str(f_test_p2), ' og p3 = ', num2str(f_test_p3)))
 

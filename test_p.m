@@ -8,6 +8,5 @@ B3 = L2*sin(theta + gamma)-y2;
 p1 = sqrt(x^2 + y^2);
 p2 = sqrt((x+A2)^2+(y+B2)^2);
 p3 = sqrt((x+A3)^2+(y+B3)^2);
-    
 
-
+  
