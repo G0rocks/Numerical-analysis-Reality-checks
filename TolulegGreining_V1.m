@@ -1,3 +1,4 @@
+pkg load symbolic
 clear all
 format short
 clc
@@ -34,6 +35,7 @@ disp('Lidur 2:')
 disp('--------------------------------')
 disp('(Sja mynd 1)')
 disp(' ') 
+disp('Sömu gildi og áðan svo rætur eru þær sömu, þurfum því ekki að athuga rætur aftur')
 
 syms theta;
 figure(1)
