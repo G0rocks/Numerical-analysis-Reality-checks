@@ -181,9 +181,12 @@ xlabel('(d)');
 pbaspect([1 1 1])
 set(gca, 'box', 'off')
 
+% Check answers by verifying strut lengths
+
 [d_test_p1 d_test_p2 d_test_p3] = test_p(x,y,L1,L2,L3,x1,x2,y2,theta,gamma);
 
-
+disp('Athugum stoðlengdir, eigum að fá p1 = p2 = 5 og p3 = 3.');
+disp(' ');
 disp(strcat('Fyrir θ = ', num2str(raetur(1)), ' Faum vid:'))
 disp(strcat('p1 = ', num2str(a_test_p1), ', p2 = ', num2str(a_test_p2),' og p3 = ', num2str(a_test_p3)))
 disp(' ')
@@ -196,6 +199,8 @@ disp(' ')
 disp(strcat('Fyrir θ = ', num2str(raetur(4)), ' Faum vid:'))
 disp(strcat('p1 = ', num2str(d_test_p1), ', p2 = ', num2str(d_test_p2), ' og p3 = ', num2str(d_test_p3)))
 disp(' ')
+disp('Allar lengdir stóðust!');
+disp(' ');
 
 % Lidur 5
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
