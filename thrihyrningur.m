@@ -1,8 +1,8 @@
 %{
-Þetta er fall sem tekur inn x,y,theta, gamma, L2 og L3
-  Númer hornpunkts er það sama og númer stoðar svo hornpunktur 3 er sá punktur
-  sem er tengdur stoð p3
-Fallið skilar svo x og y hniti hvers hornpunkts á vigurforminu
+ï¿½etta er fall sem tekur inn x,y,theta, gamma, L2 og L3
+  Nï¿½mer hornpunkts er ï¿½aï¿½ sama og nï¿½mer stoï¿½ar svo hornpunktur 3 er sï¿½ punktur
+  sem er tengdur stoÃ° p3
+Falliï¿½ skilar svo x og y hniti hvers hornpunkts ï¿½ vigurforminu
   [xhorn2,yhorn2,xhorn3,yhorn3]
 En xhorn1 = x og yhorn1 = y er satt
 %}
