@@ -12,4 +12,4 @@ function [xhorn2,yhorn2,xhorn3,yhorn3] = thrihyrningur (x, y, theta, gamma, L2, 
   yhorn2 = y+L3*sin(theta);
   xhorn3 = x+L2*cos(theta+gamma);
   yhorn3 = y+L2*sin(theta+gamma);
-endfunction
+end

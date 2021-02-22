@@ -16,4 +16,4 @@ function plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3)
   plot([0 x],[0 y],'b') % Stoð 1, p1
   plot([x1 xhorn2],[y1 yhorn2],'b') % Stoð 2, p2
   plot([x2 xhorn3],[y2 yhorn3],'b') % Stoð 3, p3
-endfunction
+end
