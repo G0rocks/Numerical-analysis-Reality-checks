@@ -50,23 +50,15 @@ disp('--------------------------------')
 disp('(Sja mynd 2)')
 disp(' ')
 
-% a)
+% a) Teiknar mynd a) í fig 1.15
 %----------------------------------------------------%
 theta = -pi/4;
 gamma = pi/2;
 [f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 
-figure(2);
-subplot(1,2,1)
-plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
-    [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
-plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
-    [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
-    'bo', 'MarkerFaceColor', 'b')
-plot([0 x],[0 y],'b')
-plot([x2 x+L2*cos(theta+gamma)],[y2 y+L2*sin(theta+gamma)],'b')
-plot([x1 x+L3*cos(theta)],[y1 y+L3*sin(theta)],'b')
+figure(2);  % Rammi 2
+subplot(1,2,1) % 2 myndir í 1*2 grid, fiktum í mynd 1
+plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3) % Plotta Stewart mynd
 
 axis([0 4.5 0 4.5])
 xlabel('(a)');
@@ -74,21 +66,13 @@ pbaspect([1 1 1])
 set(gca, 'box', 'off')
 
 
-% b)
+% b) Teiknar mynd b) í fig 1.15
 %----------------------------------------------------%
-subplot(1,2,2)
+subplot(1,2,2) % 2 myndir í 1*2 grid, fiktum í mynd 2
 theta = pi/4;
-[f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
+[f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma); % Finna ný gildi á f, x, y
 
-plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
-    [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
-plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
-    [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
-    'bo', 'MarkerFaceColor', 'b')
-plot([0 x],[0 y],'b')
-plot([x2 x+L2*cos(theta+gamma)],[y2 y+L2*sin(theta+gamma)],'b')
-plot([x1 x+L3*cos(theta)],[y1 y+L3*sin(theta)],'b')
+plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3) % Plotta Stewart mynd
 
 axis([0 4.5 0 4.5])
 xlabel('(b)');
@@ -141,7 +125,7 @@ figure(4);
 subplot(2,2,1)
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -164,7 +148,7 @@ theta = raetur(2);
 
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -189,7 +173,7 @@ theta = raetur(3);
 
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -213,7 +197,7 @@ theta = raetur(4);
 
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -279,7 +263,7 @@ figure(6);
 subplot(3,2,1)
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -302,7 +286,7 @@ theta = raetur5(2);
 
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -327,7 +311,7 @@ theta = raetur5(3);
 
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -351,7 +335,7 @@ theta = raetur5(4);
 
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -374,7 +358,7 @@ theta = raetur5(5);
 
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
@@ -397,7 +381,7 @@ theta = raetur5(6);
 
 plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
     [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on
+hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
 plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
     [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
     'bo', 'MarkerFaceColor', 'b')
