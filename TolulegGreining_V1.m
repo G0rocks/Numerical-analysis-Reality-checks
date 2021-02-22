@@ -1,4 +1,4 @@
-pkg load symbolic
+% pkg load symbolic
 clear all
 format short
 clc
@@ -39,7 +39,7 @@ disp('Sömu gildi og áðan svo rætur eru þær sömu, þurfum því ekki að athuga rætur
 
 syms theta;
 figure(1)
-ezplot(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma),[-pi,pi])
+ezplot(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma),[-pi,pi]) % Plottum f á [-pi, pi]
 clear theta
 
 % Lidur 3
@@ -82,12 +82,14 @@ set(gca, 'box', 'off')
  
 % Lidur 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Eigum að finna stöðu platforms (x,y,theta) fyrir gefnar lengdir á stoðum (p1,p2,p3)
 disp(' ')
 disp('Lidur 4:')
 disp('--------------------------------')
-disp('(Sja myndir 3 og 4)')
+disp('(Sja myndir 3, plot af f, og 4, stöðurnar 4 sem uppfylla skilyrðin)')
 disp(' ')
 
+% Setjum inn ný gildi á breytum
 p1 = 5; p2 = 5; p3 = 3;
 x1 = 5; y1 = 0; 
 x2 = 0; y2 = 6;
@@ -96,18 +98,19 @@ gamma = pi/4;
 syms theta;
 [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 figure(3);
-ezplot(f,[-pi,pi])
+ezplot(f,[-pi,pi]) % Plottum f á [-pi, pi]
 
 
 % Skrifum litid rotaleitarforrit:
 %----------------------------------------------------%
 raetur = [];
-range = [-4 -3;-3 -2;-2 -1;-1 0; 0 1;1 2;2 3;3 4];
+range = [-4 -3;-3 -2;-2 -1;-1 0; 0 1;1 2;2 3;3 4];  % Skoðum nokkur bil af lengd 1 sem innihalda [-pi, pi]
 telja_raetur = 0;
 
+% Litla rótaleitarforritið
 for k = 1:8
-   rot = double(vpasolve(f,theta,range(k)));
-   if (~ismember(rot,raetur) && -pi < rot && rot < pi)
+   rot = double(vpasolve(f,theta,range(k)));  % Finnur rót fyrir gefið fall á gefnu bilinu
+   if (~ismember(rot,raetur) && -pi < rot && rot < pi)  % Ef rótin er ekki duplicate og er á bilinu [-pi, pi] bætum við henni við
        telja_raetur = telja_raetur + 1;
        raetur(telja_raetur) = rot;
    end
@@ -116,22 +119,14 @@ end
 
 
 % 
-% a)
+% a) Teikna eina af fjórum stöðum á mynd a) á ramma 4
 % ----------------------------------------------------%
 theta = raetur(1);
 [f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 
-figure(4);
-subplot(2,2,1)
-plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
-    [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
-plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
-    [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
-    'bo', 'MarkerFaceColor', 'b')
-plot([0 x],[0 y],'b')
-plot([x2 x+L2*cos(theta+gamma)],[y2 y+L2*sin(theta+gamma)],'b')
-plot([x1 x+L3*cos(theta)],[y1 y+L3*sin(theta)],'b')
+figure(4); % Rammi 4
+subplot(2,2,1) % Mynd 1 í 2x2 grid
+plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3) % Plotta Stewart mynd
 
 axis([-2 8 -2 8])
 xlabel('(a)');
@@ -140,21 +135,13 @@ set(gca, 'box', 'off')
 
 [a_test_p1 a_test_p2 a_test_p3] = test_p(x,y,L1,L2,L3,x1,x2,y2,theta,gamma);
 
-%b)
+%b) Teikna eina af fjórum stöðum á mynd b) á ramma 4
 %----------------------------------------------------%
-subplot(2,2,2)
+subplot(2,2,2) % Mynd 2 á 2x2 grid
 theta = raetur(2);
 [f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 
-plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
-    [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
-plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
-    [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
-    'bo', 'MarkerFaceColor', 'b')
-plot([0 x],[0 y],'b')
-plot([x2 x+L2*cos(theta+gamma)],[y2 y+L2*sin(theta+gamma)],'b')
-plot([x1 x+L3*cos(theta)],[y1 y+L3*sin(theta)],'b')
+plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3) % Plotta Stewart mynd
 
 axis([-2 8 -2 8])
 xlabel('(b)');
@@ -165,21 +152,13 @@ set(gca, 'box', 'off')
 
 
 
-% c)
+% c) Teikna eina af fjórum stöðum á mynd c) á ramma 4
 %----------------------------------------------------%
-subplot(2,2,3)
+subplot(2,2,3) % Mynd 3 á 2x2 grid
 theta = raetur(3);
 [f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 
-plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
-    [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
-plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
-    [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
-    'bo', 'MarkerFaceColor', 'b')
-plot([0 x],[0 y],'b')
-plot([x2 x+L2*cos(theta+gamma)],[y2 y+L2*sin(theta+gamma)],'b')
-plot([x1 x+L3*cos(theta)],[y1 y+L3*sin(theta)],'b')
+plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3) % Plotta Stewart mynd
 
 axis([-2 8 -2 8])
 xlabel('(c)');
@@ -189,21 +168,13 @@ set(gca, 'box', 'off')
 [c_test_p1 c_test_p2 c_test_p3] = test_p(x,y,L1,L2,L3,x1,x2,y2,theta,gamma);
 
  
-% d)
+% d) Teikna eina af fjórum stöðum á mynd d) á ramma 4
 %----------------------------------------------------%
-subplot(2,2,4)
+subplot(2,2,4) % Mynd 4 á 2x2 grid
 theta = raetur(4);
 [f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 
-plot([x x+L2*cos(theta+gamma) x+L3*cos(theta) x],...
-    [y y+L2*sin(theta+gamma) y+L3*sin(theta) y],'r');
-hold on % Bætum við öðru plotti ofan á það plot á þeirri mynd í þeim ramma sem við erum í
-plot([0 x1 x2 x x+L2*cos(theta+gamma) x+L3*cos(theta)],...
-    [0 0 y2 y y+L2*sin(theta+gamma) y+L3*sin(theta)],...
-    'bo', 'MarkerFaceColor', 'b')
-plot([0 x],[0 y],'b')
-plot([x2 x+L2*cos(theta+gamma)],[y2 y+L2*sin(theta+gamma)],'b')
-plot([x1 x+L3*cos(theta)],[y1 y+L3*sin(theta)],'b')
+plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3) % Plotta Stewart mynd
 
 axis([-2 8 -2 8])
 xlabel('(d)');
