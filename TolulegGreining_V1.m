@@ -476,8 +476,40 @@ disp(' ');
 
 % Lidur 7
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
+disp(' ')
+disp('Lidur 7:')
+disp('--------------------------------')
+disp(' ')
 
+p1 = 5; p3 = 3;
+x1 = 5; y1 = 0; 
+x2 = 0; y2 = 6;
+L1 = 3; L2 = 3*sqrt(2); L3 = 3;
+gamma = pi/4;
+
+fjoldi_rota_old=0;
+
+for p2=0:0.01:100
+    fjoldi_rota=0;
+    fa=0;
+    
+    for theta=-pi:0.01:pi
+        [fb, xb, yb]= f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma); 
+
+
+        if fa*fb<0
+            fjoldi_rota=fjoldi_rota+1;
+        end
+        fa=fb;
+    end
+    
+    if fjoldi_rota ~= fjoldi_rota_old;
+        disp(p2)
+        disp(fjoldi_rota)
+    end
+    fjoldi_rota_old=fjoldi_rota;
+end
 
 
 
