@@ -40,6 +40,7 @@ disp('Sömu gildi og áðan svo rætur eru þær sömu, þurfum því ekki að a
 syms theta;
 figure(1)
 ezplot(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma),[-pi,pi]) % Plottum f á [-pi, pi]
+grid on;
 clear theta
 
 % Lidur 3
@@ -99,7 +100,7 @@ syms theta;
 [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 figure(3);
 ezplot(f,[-pi,pi]) % Plottum f á [-pi, pi]
-
+grid on;
 
 % Skrifum litid rotaleitarforrit:
 %----------------------------------------------------%
@@ -215,7 +216,7 @@ syms theta;
 [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 figure(5);
 ezplot(f,[-pi,pi])
-
+grid on;
 
 % Skrifum litid rotaleitarforrit:
 %----------------------------------------------------%
@@ -352,10 +353,131 @@ disp(' ');
 
 % Lidur 6
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Find a strut length p2 with the rest of the parameters the same as in liður 4
+% where there are only 2 poses
 
 disp(' ')
 disp('Lidur 6:')
 disp('--------------------------------')
 disp(' ')
+
+% Plotta f_af_theta test
+p2 = 4.1;   % Finnum lágmarksgildi á p2. Er 3.8 miðað við nákvæmni upp á 1/10. Þar eru tvær rætur á f_af_theta ef við byrjum með p2=0
+syms theta;
+[f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
+figure(7);
+grid on;
+ezplot(f,[-pi,pi])
+
+% Skrifum litid rotaleitarforrit:
+%----------------------------------------------------%
+
+% Veljum viðeigandi bil og sjaum hvar raetur liggja af grafi
+% Teiknum upp feril fallsins f_af_theta á bilinu [-pi, pi]
+% Prófum fullt af gildum á p2, teljum fjölda róta fyrir hvert gildi sem við prófum
+% Ef við rekumst á gildi sem skilar 2 rótum þá veljum við það
+rotabil = [1 1.75; 1.8 2.5];
+raetur6 = [];
+k = 1;
+while k < 4
+  try
+   temp = double(vpasolve(f, theta, rotabil(k)))
+   if abs(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,temp,gamma)) >= (5*10^(-10))  % Athugum nákvæmni rótar
+     f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,temp,gamma)
+     raetur6(1) = 1;
+     raetur6(2) = 2;
+     raetur6(3) = 3;
+   end
+   if ((temp > rotabil(1)) && (temp < rotabil(2)))  % Höfum fundið k rætur
+    raetur6(k) = temp;
+    rotabil = [raetur6(k)+eps, pi];
+    k = k+1
+    if length(raetur6) > 2  % Of margar rætur, hækkum p2 og byrjum aftur
+      raetur6
+      p2 = p2 + 1/50
+      k = 1
+      raetur6 = [];
+      rotabil = [-pi,pi];
+    end
+    if p2 >50
+      k = 10;
+      break
+    end
+    [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
+    figure(7);
+    ezplot(f,[-pi,pi])
+    grid on;
+
+  else
+  k = k+1;
+  end
+  
+   catch  % Förum hingað ef vpasolve klikkar og kastar villu (t.d. ef enga rót er að finna á bilinu)
+   if k > 2 % Fundum tvær rætur og finnum ekki fleiri
+     disp('Tvær rætur fundnar!');
+     k = 4
+     break
+   end
+   p2 = p2 + 1/50;
+    
+    % Teiknum feril f_af_theta á ramma 7
+   disp(strcat('k er: ', num2str(k)));
+   rotabil = [-pi,pi];
+   [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
+   figure(7);
+   grid on;
+   ezplot(f,[-pi,pi])
+   if p2 > 10;
+     k = 10;
+     break
+   end
+   k = 1;
+  end
+end
+
+% Nýr rammmi til að teikna stöður
+figure(8);
+
+% Teikna stöður í ramma 8
+%----------------------------------------------------%
+for i = 1:2
+  theta = raetur6(i);
+  [f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
+
+  subplot(1,2,i)
+  plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3) % Plotta Stewart mynd
+
+  axis([-2 10 -1 20])
+  if i == 1
+  xlabel('(a)');
+  [a_test_p1 a_test_p2 a_test_p3] = test_p(x,y,L1,L2,L3,x1,x2,y2,theta,gamma);
+  elseif i == 2
+  xlabel('(b)');
+  [b_test_p1 b_test_p2 b_test_p3] = test_p(x,y,L1,L2,L3,x1,x2,y2,theta,gamma);
+  end
+
+  pbaspect([1 1 1])
+  set(gca, 'box', 'off')
+end
+
+% Prófa niðurstöður
+disp(strcat('Athugum stoðlengdir, eigum að fá p1 = 5, p2 = ', num2str(p2),' og p3 = 3.'));
+disp(' ');
+disp(strcat('a) Fyrir θ = ', num2str(raetur6(1)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(a_test_p1), ', p2 = ', num2str(a_test_p2), ' og p3 = ', num2str(a_test_p3)))
+disp(' ')
+disp(strcat('b) Fyrir θ = ', num2str(raetur6(2)), ' Faum vid:'))
+disp(strcat('p1 = ', num2str(b_test_p1), ', p2 = ', num2str(b_test_p2), ' og p3 = ', num2str(b_test_p3)))
+disp(' ')
+
+disp('Allar lengdir stóðust!');
+disp(' ');
+
+
+% Lidur 7
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+
+
 
 
