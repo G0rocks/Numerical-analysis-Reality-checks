@@ -1,3 +1,8 @@
+%{
+Fall sem er 0 þegar við setjum inn gildi sem ganga upp en eitthvað annað,
+annars fæst eitthvað annað en 0.
+%}
+
 function [f, x, y]= f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma) 
 
 A2 = L3*cos(theta)-x1;
