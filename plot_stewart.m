@@ -4,7 +4,6 @@ Fall sem plottar Stewart myndina á það plot sem er nú valið fyrir gefin gil
 %}
 
 function plot_stewart (x1, x2, y2, theta, gamma, p1, p2, p3, L1, L2, L3)
-  clf   % Hreinsa ramma til að byrja með
   y1 = 0;
   
   [f,x,y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
