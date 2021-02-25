@@ -362,7 +362,7 @@ disp('--------------------------------')
 disp(' ')
 
 % Plotta f_af_theta test
-p2 = 4;   % Finnum lágmarksgildi á p2. Er 3.8 miðað við nákvæmni upp á 1/10. Þar eru tvær rætur á f_af_theta ef við byrjum með p2=0
+p2 = 4.1;   % Finnum lágmarksgildi á p2. Er 3.8 miðað við nákvæmni upp á 1/10. Þar eru tvær rætur á f_af_theta ef við byrjum með p2=0
 syms theta;
 [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
 figure(7);
@@ -382,22 +382,19 @@ k = 1;
 while k < 4
   try
    temp = double(vpasolve(f, theta, rotabil(k)))
-   if abs(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,temp,gamma)) >= (10^6)*eps
-     disp('Rót virkar ekki, prentum f_af_theta');
+   if abs(f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,temp,gamma)) >= (5*10^(-10))  % Athugum nákvæmni rótar
      f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,temp,gamma)
      raetur6(1) = 1;
      raetur6(2) = 2;
      raetur6(3) = 3;
    end
-   if ((temp > rotabil(1)) && (temp < rotabil(2)))
+   if ((temp > rotabil(1)) && (temp < rotabil(2)))  % Höfum fundið k rætur
     raetur6(k) = temp;
     rotabil = [raetur6(k)+eps, pi];
-    disp(strcat('Fundum  ', num2str(k),' rætur'));
     k = k+1
-    if length(raetur6) > 2
-      disp('Of margar rætur, hækkum p og byrjum aftur');
+    if length(raetur6) > 2  % Of margar rætur, hækkum p2 og byrjum aftur
       raetur6
-      p2 = p2 + 1/10
+      p2 = p2 + 1/50
       k = 1
       raetur6 = [];
       rotabil = [-pi,pi];
@@ -415,15 +412,15 @@ while k < 4
   k = k+1;
   end
   
-   catch
-   p2 = p2 + 1/10;
-   if k > 2
-     disp('Tvær rætur fundnar, finnum ekki fleiri');
+   catch  % Förum hingað ef vpasolve klikkar og kastar villu (t.d. ef enga rót er að finna á bilinu)
+   if k > 2 % Fundum tvær rætur og finnum ekki fleiri
+     disp('Tvær rætur fundnar!');
      k = 4
      break
    end
-   disp(strcat('Engin rót á þessu bili, reynum aftur með p2 = ', num2str(p2)));
-   disp('Teiknum mynd af f_af_theta');
+   p2 = p2 + 1/50;
+    
+    % Teiknum feril f_af_theta á ramma 7
    disp(strcat('k er: ', num2str(k)));
    rotabil = [-pi,pi];
    [f, x, y] = f_af_theta(p1,p2,p3,L1,L2,L3,x1,x2,y2,theta,gamma);
@@ -472,6 +469,10 @@ disp(' ')
 disp(strcat('b) Fyrir θ = ', num2str(raetur6(2)), ' Faum vid:'))
 disp(strcat('p1 = ', num2str(b_test_p1), ', p2 = ', num2str(b_test_p2), ' og p3 = ', num2str(b_test_p3)))
 disp(' ')
+
+disp('Allar lengdir stóðust!');
+disp(' ');
+
 
 % Lidur 7
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
