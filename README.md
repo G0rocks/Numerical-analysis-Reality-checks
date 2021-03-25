@@ -1,4 +1,3 @@
-# Töluleg greining - forritunarverkefni 1 - Stewart Platform in 2D
-Forritunarverkefni 1 í tölulegri greiningu við HÍ vorið 2021
+# Repo fyrir hóplausnir á reality check verkefnum úr Numerical Analysis
 
-Verkefnið heitir reality check 1 - Kinematics of the Stewart platform og er á bls 67 (81 í pdf-inu) í 2. útgáfu af bókinni Numerical analysis eftir Timothy Sauer
+Fyrir tölulega greiningu vorið 2021 í Háskóla Íslands.
