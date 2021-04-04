@@ -1,0 +1,1 @@
+% Function for computing the first x derivative in the P pathfunction x_der1 = x_der1(t)  x_der1 = 0.3 + 7.8.*t - 14.1.*t.*t;end % Function
