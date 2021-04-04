@@ -1,0 +1,1 @@
+% Function for computing the first derivative of y in the P pathfunction y_der1 = y_der1(t)  y_der1 = 0.3 + 1.8.*t - 8.1.*t.*t;end % Function
