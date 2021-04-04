@@ -4,7 +4,10 @@
 % Left boundary, a
 % Right boundary, b
 
-function lengd = basic_arc_length(x_der1_local, y_der1_local, a, b)
+% Uses adaptive quadrature (integral function)
+% Tolerance is the default tolerance
+
+function lengd = arc_length(x_der1_local, y_der1_local, a, b)
   fun = @(t) pythagoras_C(x_der1_local(t), y_der1_local(t)); % creating function to integrate
   lengd = integral(fun, a, b);  % Integrate to find arc length
 end % Function
