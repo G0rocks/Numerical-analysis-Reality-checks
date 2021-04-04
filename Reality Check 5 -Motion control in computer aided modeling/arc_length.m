@@ -7,7 +7,7 @@
 % Uses adaptive quadrature (integral function)
 % Tolerance is the default tolerance
 
-function lengd = arc_length(x_der1_local, y_der1_local, a, b)
+function lengd = arc_length(x_der1_local, y_der1_local, a, b, TOL)
   fun = @(t) pythagoras_C(x_der1_local(t), y_der1_local(t)); % creating function to integrate
-  lengd = integral(fun, a, b);  % Integrate to find arc length
+  lengd = integral(fun, a, b, 'AbsTol', TOL);  % Integrate to find arc length using tolerance TOL
 end % Function
