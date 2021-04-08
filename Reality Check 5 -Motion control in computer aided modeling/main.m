@@ -33,7 +33,7 @@ TOL3 = eps;
 t_4 = [0];
 n = 4;
 for tikk = 1:n
-    t_4(tikk+1) = find_t_marked(tikk/n, x_der1_handle, y_der1_handle, t, T, TOL3);
+    t_4(tikk+1) = find_t_marked(tikk/n, x_der1_handle, y_der1_handle, t, T, TOL3, 1);
     lengdir_gef_n(tikk) = arc_length(x_der1_handle, y_der1_handle,t_4(tikk),t_4(tikk+1),TOL3);
 end
 lengdir_gef_n(:)
@@ -41,7 +41,7 @@ lengdir_gef_n(:)
 t_20 = [0];
 n = 20;
 for tikk = 1:n
-    t_20(tikk+1) = find_t_marked(tikk/n, x_der1_handle, y_der1_handle, t, T, TOL3);
+    t_20(tikk+1) = find_t_marked(tikk/n, x_der1_handle, y_der1_handle, t, T, TOL3, 1);
     lengdir_gef_n(tikk) = arc_length(x_der1_handle, y_der1_handle,t_20(tikk),t_20(tikk+1),TOL3);
 end
 lengdir_gef_n(:)
