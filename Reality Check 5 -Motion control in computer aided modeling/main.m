@@ -1,5 +1,5 @@
 % Reality check 5 in numerical analysis
-
+figurecounter=0;
 % Liður 1
 disp('Liður 1');
 disp('');
@@ -54,7 +54,9 @@ disp('Lengdir á milli grænu punktanna:');
 lengdir_gef_n(:)
 
 timi = linspace(0,1,10000);
-figure(1);
+
+figurecounter=figurecounter+1;
+figure(figurecounter);
 clf;
 hold on
 plot(P_x(timi),P_y(timi))
@@ -109,7 +111,9 @@ disp('Lengdir á milli grænu punktanna:');
 lengdir_gef_n(:)
 
 timi = linspace(0,1,10000);
-figure(2);
+
+figurecounter=figurecounter+1;
+figure(figurecounter);
 clf;
 hold on
 plot(P_x(timi),P_y(timi))
@@ -157,42 +161,34 @@ disp('');
 %disp('');
 
 
-% Liður 7
-%disp('');
-%disp('Liður 7');
-%disp('');
-%figure(3);
-x_7p=@(b) b;
-y_7p=@(b) b.^(1/3);
+%Liður 7
+disp('');
+disp('Liður 7');
+disp('');
+h=0.01  %skrefastærð
+%%animatecurve(xf,yf,a,b,h,k)
 
-%hold on
-%for s=0:0.01:1
-%    x_7=s;
-%    y_7=s^(1/3);
-    
-%    set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
-%    axis square
-%    cla
-%    plot(x_7p(timi),y_7p(timi))
-%    ball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
 
-    
-%    set(ball,'xdata',x_7,'ydata',y_7);drawnow;pause(0.01)
-%end
-
+%TEIKNAR C(s)=s^(1/3)
+figurecounter=figurecounter+1;
 x_7l1=@(b) b;
 y_7l1=@(b) b.^(1/3);
-animatecurve(x_7l1,y_7l1,1,3)
+animatecurve(x_7l1,y_7l1,0,1,h,figurecounter)
 
+%TEIKNAR C(s)=s^2
+figurecounter=figurecounter+1;
 x_7l2=@(b) b;
 y_7l2=@(b) b.^(2);
-animatecurve(x_7l2,y_7l2,1,4)
+animatecurve(x_7l2,y_7l2,0,1,h,figurecounter)
 
+%TEIKNAR C(s)=sin(s*pi/2)
+figurecounter=figurecounter+1;
 x_7l3=@(b) b;
 y_7l3=@(b) sin((b.*pi)/2);
-animatecurve(x_7l3,y_7l3,1,5)
+animatecurve(x_7l3,y_7l3,0,1,h,figurecounter)
 
-
+%TEIKNAR C(s)=1/2+(1/2)*(sin((2s-1)*pi/2)
+figurecounter=figurecounter+1;
 x_7l4=@(b) b;
 y_7l4=@(b) 1/2+(1/2)*sin(((2*b)-1)*pi/2);
-animatecurve(x_7l4,y_7l4,1,6)
+animatecurve(x_7l4,y_7l4,0,1,h,figurecounter)
