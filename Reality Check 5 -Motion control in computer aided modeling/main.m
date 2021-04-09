@@ -57,11 +57,11 @@ timi = linspace(0,1,10000);
 figure(1);
 clf;
 hold on
-plot(x(timi),y(timi))
-plot(x(t_4),y(t_4),'*r')
-plot(x(t_20),y(t_20),'*r','color','g')
-plot(x(t_4),y(t_4),'*r')
-text(x(timi(1)),y(timi(1))-.05,'t = 0')
+plot(P_x(timi),P_y(timi))
+plot(P_x(t_4),P_y(t_4),'*r')
+plot(P_x(t_20),P_y(t_20),'*r','color','g')
+plot(P_x(t_4),P_y(t_4),'*r')
+text(P_x(timi(1)),P_y(timi(1))-.05,'t = 0')
 hold off
 
 klukka_3 = toc(klukka); % End timer
@@ -112,11 +112,11 @@ timi = linspace(0,1,10000);
 figure(2);
 clf;
 hold on
-plot(x(timi),y(timi))
-plot(x(t_4),y(t_4),'*r')
-plot(x(t_20),y(t_20),'*r','color','g')
-plot(x(t_4),y(t_4),'*r')
-text(x(timi(1)),y(timi(1))-.05,'t = 0')
+plot(P_x(timi),P_y(timi))
+plot(P_x(t_4),P_y(t_4),'*r')
+plot(P_x(t_20),P_y(t_20),'*r','color','g')
+plot(P_x(t_4),P_y(t_4),'*r')
+text(P_x(timi(1)),P_y(timi(1))-.05,'t = 0')
 hold off
 
 klukka_4_3 = toc(klukka); % End timer
@@ -136,13 +136,14 @@ disp('');
   % Draw path in figure
 figure(3);
 clf;
-figure(3).Position = [400, 500, 600, 400];
+set(gcf, 'position', [250 250 600 600]);
 hold on;
-plot(x(timi),y(timi));
+plot(P_x(timi),P_y(timi));
 
 set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
 cla
-axis squareball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
+axis square
+ball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
 
 set(ball,'xdata',x,'ydata',y);
 drawnow;

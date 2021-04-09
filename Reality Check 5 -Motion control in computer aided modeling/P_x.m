@@ -1,0 +1,1 @@
+% Function for computing x in the P pathfunction x = P_x(t)  x = 0.5 + 0.3.*t + 3.9.*t.*t - 4.7.*t.*t.*t;end % Function
