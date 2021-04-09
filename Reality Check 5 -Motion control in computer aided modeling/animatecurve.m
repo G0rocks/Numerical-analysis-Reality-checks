@@ -8,12 +8,12 @@ figure(k)
 cla
 n=linspace(a,b,abs(b-a)*10000);
 hold on
-filename=strcat('figure ', k,'.gif')
+filename=strcat('figure ', num2str(k),'.gif')
 for i=a:h:b
     x=xf(i);
     y=yf(i);
     %set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
-    set(gca,'XLim',[0 1],'YLim',[0 1], 'SortMethod', 'childorder', 'Visible','on');
+    set(gca,'XLim',[-2 2],'YLim',[-2 2], 'SortMethod', 'childorder', 'Visible','on');
     axis square
     cla
     plot(xf(n),yf(n))
