@@ -130,7 +130,15 @@ disp(strcat('Tímasparnaður:  ', num2str(klukka_3-klukka_4_3), 's'));
 %disp('Liður 5');
 %disp('');
 
-
+%figure(3)  
+%set(gca,'XLim',[-2 2],'YLim',[-2 2],'Drawmode', 'fast' ,'Visible','on');
+%cla
+%axis square
+%for t_l5=0:0.01:1
+%    ball=line('color','r','Marker','o','MarkerSize',10,'LineWidth',2, 'erase','xor','xdata',x(t_l5),'ydata',y(t_l5));    
+%    set(ball,'xdata',x, 'ydata',y);drawnow; pause(0.05)
+%end
+ 
 % Liður 6
 %disp('');
 %disp('Liður 6');
