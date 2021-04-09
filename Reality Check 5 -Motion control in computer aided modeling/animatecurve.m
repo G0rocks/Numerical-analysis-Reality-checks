@@ -12,7 +12,6 @@ filename=strcat('figure ', num2str(k),'.gif')
 for i=a:h:b
     x=xf(i);
     y=yf(i);
-    %set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
     set(gca,'XLim',[0 c],'YLim',[0 c], 'SortMethod', 'childorder', 'Visible','on');
     axis square
     cla

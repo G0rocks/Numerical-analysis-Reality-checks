@@ -160,7 +160,9 @@ animatecurve(P_x_const,P_y_const,0,s,h,figurecounter,2);
 %disp('');
 %disp('Liður 6');
 %disp('');
-
+% copied from Liður 1
+qx_der1_handle = @qx_der1;  % First x derivative of Q
+qy_der1_handle = @qy_der1;  % First y derivative of Q
 % copied from Liður 2
 
 
