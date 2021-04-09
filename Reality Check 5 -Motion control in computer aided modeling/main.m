@@ -112,10 +112,10 @@ lengdir_gef_n(:)
 
 timi = linspace(0,1,10000);
 
-figurecounter=figurecounter+1;
-figure(figurecounter);
+
 clf;
-hold on
+figurecounter=figurecounter+1;
+figure(figurecounter);hold on
 plot(P_x(timi),P_y(timi))
 plot(P_x(t_4),P_y(t_4),'*r')
 plot(P_x(t_20),P_y(t_20),'*r','color','g')
@@ -140,17 +140,17 @@ disp('');
 h=0.01  %skrefastærð
 
   % Animation with default speed
-P_x_handle = @(t) P_x(t);
-P_y_handle = @(t) P_y(t);
-figurecounter=figurecounter+1;
-figure(figurecounter);
+P_x_handle = @(b) P_x(b);
+P_y_handle = @(b) P_y(b);
+figurecounter=figurecounter+1
 animatecurve(P_x_handle,P_y_handle,0,s,h,figurecounter);
   
+cla
   % Animation with constant speed
-P_x_const = @(t) P_x(find_t_marked(t, x_der1_local, y_der1_local, 0, 1, TOL, 1))
-P_y_const = @(t) P_y(find_t_marked(t, x_der1_local, y_der1_local, 0, 1, TOL, 1))
-figurecounter=figurecounter+1;
-figure(figurecounter);
+P_x_const = @(t) P_x(find_t_marked(t, x_der1_handle, y_der1_handle, 0, 1, TOL, 1))
+P_y_const = @(t) P_y(find_t_marked(t, x_der1_handle, y_der1_handle, 0, 1, TOL, 1))
+figurecounter=figurecounter+1
+pause(0.2);
 animatecurve(P_x_const,P_y_const,0,s,h,figurecounter);
   
 
