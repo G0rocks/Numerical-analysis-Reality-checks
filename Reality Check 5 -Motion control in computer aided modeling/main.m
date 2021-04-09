@@ -137,22 +137,22 @@ disp('');
 disp('Liður 5');
 disp('');
 
-  % Draw path in figure
-%figure(3);
-%clf;
-%set(gcf, 'position', [250 250 600 600]);
-%hold on;
-%plot(P_x(timi),P_y(timi));
+h=0.01  %skrefastærð
 
-%set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
-%cla
-%axis square
-%ball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
-
-%set(ball,'xdata',x,'ydata',y);
-%drawnow;
-%pause(0.01)
-
+  % Animation with default speed
+P_x_handle = @(t) P_x(t);
+P_y_handle = @(t) P_y(t);
+figurecounter=figurecounter+1;
+figure(figurecounter);
+animatecurve(P_x_handle,P_y_handle,0,s,h,figurecounter);
+  
+  % Animation with constant speed
+P_x_const = @(t) P_x(find_t_marked(t, x_der1_local, y_der1_local, 0, 1, TOL, 1))
+P_y_const = @(t) P_y(find_t_marked(t, x_der1_local, y_der1_local, 0, 1, TOL, 1))
+figurecounter=figurecounter+1;
+figure(figurecounter);
+animatecurve(P_x_const,P_y_const,0,s,h,figurecounter);
+  
 
  
 % Liður 6
