@@ -266,3 +266,5 @@ figurecounter=figurecounter+1;
 x_7l4=@(b) b;
 y_7l4=@(b) 1/2+(1/2)*sin(((2*b)-1)*pi/2);
 animatecurve(x_7l4,y_7l4,0,1,h,figurecounter,1)
+
+% Comment
