@@ -13,11 +13,12 @@ for i=0:0.01:s
     x=xf(i);
     y=yf(i);
     
-    set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
+    %set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
+    set(gca,'XLim',[0 1],'YLim',[0 1], 'SortMethod', 'childorder', 'Visible','on');
     axis square
     cla
     plot(xf(n),yf(n))
-    ball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
+    ball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'xdata',[],'ydata',[]);
 
     
     set(ball,'xdata',x,'ydata',y);drawnow;pause(0.01)
