@@ -54,6 +54,8 @@ disp('Lengdir á milli grænu punktanna:');
 lengdir_gef_n(:)
 
 timi = linspace(0,1,10000);
+figure(1);
+clf;
 hold on
 plot(x(timi),y(timi))
 plot(x(t_4),y(t_4),'*r')
@@ -108,6 +110,7 @@ lengdir_gef_n(:)
 
 timi = linspace(0,1,10000);
 figure(2);
+clf;
 hold on
 plot(x(timi),y(timi))
 plot(x(t_4),y(t_4),'*r')
@@ -126,9 +129,24 @@ disp(strcat('Tímasparnaður:  ', num2str(klukka_3-klukka_4_3), 's'));
 
 
 % Liður 5
-%disp('');
-%disp('Liður 5');
-%disp('');
+disp('');
+disp('Liður 5');
+disp('');
+
+  % Draw path in figure
+figure(3);
+clf;
+figure(3).Position = [400, 500, 600, 400];
+hold on;
+plot(x(timi),y(timi));
+
+set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
+cla
+axis squareball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
+
+set(ball,'xdata',x,'ydata',y);
+drawnow;
+pause(0.01)
 
 
 % Liður 6
