@@ -134,22 +134,23 @@ disp('Liður 5');
 disp('');
 
   % Draw path in figure
-figure(3);
-clf;
-set(gcf, 'position', [250 250 600 600]);
-hold on;
-plot(P_x(timi),P_y(timi));
+%figure(3);
+%clf;
+%set(gcf, 'position', [250 250 600 600]);
+%hold on;
+%plot(P_x(timi),P_y(timi));
 
-set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
-cla
-axis square
-ball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
+%set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
+%cla
+%axis square
+%ball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
 
-set(ball,'xdata',x,'ydata',y);
-drawnow;
-pause(0.01)
+%set(ball,'xdata',x,'ydata',y);
+%drawnow;
+%pause(0.01)
 
 
+ 
 % Liður 6
 %disp('');
 %disp('Liður 6');
@@ -160,3 +161,38 @@ pause(0.01)
 %disp('');
 %disp('Liður 7');
 %disp('');
+%figure(3);
+x_7p=@(b) b;
+y_7p=@(b) b.^(1/3);
+
+%hold on
+%for s=0:0.01:1
+%    x_7=s;
+%    y_7=s^(1/3);
+    
+%    set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
+%    axis square
+%    cla
+%    plot(x_7p(timi),y_7p(timi))
+%    ball = line('color','r','Marker','o','MarkerSize',10, 'LineWidth',2,'erase','xor','xdata',[],'ydata',[]);
+
+    
+%    set(ball,'xdata',x_7,'ydata',y_7);drawnow;pause(0.01)
+%end
+
+x_7l1=@(b) b;
+y_7l1=@(b) b.^(1/3);
+animatecurve(x_7l1,y_7l1,1,3)
+
+x_7l2=@(b) b;
+y_7l2=@(b) b.^(2);
+animatecurve(x_7l2,y_7l2,1,4)
+
+x_7l3=@(b) b;
+y_7l3=@(b) sin((b.*pi)/2);
+animatecurve(x_7l3,y_7l3,1,5)
+
+
+x_7l4=@(b) b;
+y_7l4=@(b) 1/2+(1/2)*sin(((2*b)-1)*pi/2);
+animatecurve(x_7l4,y_7l4,1,6)
