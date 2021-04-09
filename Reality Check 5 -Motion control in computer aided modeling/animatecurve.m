@@ -3,7 +3,7 @@
 %s er s
 %k er numer a mynd
 
-function animatecurve(xf,yf,a,b,h,k)
+function animatecurve(xf,yf,a,b,h,k,c)
 figure(k)
 cla
 n=linspace(a,b,abs(b-a)*10000);
@@ -13,7 +13,7 @@ for i=a:h:b
     x=xf(i);
     y=yf(i);
     %set(gca,'XLim',[0 1],'YLim',[0 1],'Drawmode','fast', 'Visible','on');
-    set(gca,'XLim',[-2 2],'YLim',[-2 2], 'SortMethod', 'childorder', 'Visible','on');
+    set(gca,'XLim',[0 c],'YLim',[0 c], 'SortMethod', 'childorder', 'Visible','on');
     axis square
     cla
     plot(xf(n),yf(n))

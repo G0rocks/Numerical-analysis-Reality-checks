@@ -1,4 +1,5 @@
 % Reality check 5 in numerical analysis
+clear all
 figurecounter=0;
 % Liður 1
 disp('Liður 1');
@@ -20,7 +21,7 @@ disp('');
 
 klukka = tic;  % Start timer
 TOL = 0.0001;
-s = 0.5;
+s = 1;
 t_marked = find_t_marked(s, x_der1_handle, y_der1_handle, t, T, TOL, 1)
 disp("Validating t_marked (close to 0 if t_marked is correct)");
 arc_length_validation = arc_length(x_der1_handle, y_der1_handle, t, t_marked, TOL)./arc_length(x_der1_handle, y_der1_handle, t, T, TOL) - s
@@ -113,9 +114,9 @@ lengdir_gef_n(:)
 timi = linspace(0,1,10000);
 
 
-clf;
 figurecounter=figurecounter+1;
 figure(figurecounter);hold on
+clf;
 plot(P_x(timi),P_y(timi))
 plot(P_x(t_4),P_y(t_4),'*r')
 plot(P_x(t_20),P_y(t_20),'*r','color','g')
@@ -143,15 +144,15 @@ h=0.01  %skrefastærð
 P_x_handle = @(b) P_x(b);
 P_y_handle = @(b) P_y(b);
 figurecounter=figurecounter+1
-animatecurve(P_x_handle,P_y_handle,0,s,h,figurecounter);
+animatecurve(P_x_handle,P_y_handle,0,s,h,figurecounter,2);
   
 cla
   % Animation with constant speed
-P_x_const = @(t) P_x(find_t_marked(t, x_der1_handle, y_der1_handle, 0, 1, TOL, 1))
-P_y_const = @(t) P_y(find_t_marked(t, x_der1_handle, y_der1_handle, 0, 1, TOL, 1))
+P_x_const = @(b) P_x(find_t_marked(b, x_der1_handle, y_der1_handle, 0, 1, TOL, 1))
+P_y_const = @(b) P_y(find_t_marked(b, x_der1_handle, y_der1_handle, 0, 1, TOL, 1))
 figurecounter=figurecounter+1
 pause(0.2);
-animatecurve(P_x_const,P_y_const,0,s,h,figurecounter);
+animatecurve(P_x_const,P_y_const,0,s,h,figurecounter,2);
   
 
  
@@ -159,6 +160,77 @@ animatecurve(P_x_const,P_y_const,0,s,h,figurecounter);
 %disp('');
 %disp('Liður 6');
 %disp('');
+
+% copied from Liður 2
+
+
+klukka = tic;  % Start timer
+TOL = 0.0001;
+s = 1;
+t_marked = find_t_marked(s, qx_der1_handle, qy_der1_handle, t, T, TOL, 1)
+disp("Validating t_marked (close to 0 if t_marked is correct)");
+arc_length_validation = arc_length(qx_der1_handle, qy_der1_handle, t, t_marked, TOL)./arc_length(qx_der1_handle, qy_der1_handle, t, T, TOL) - s
+klukka_2 = toc(klukka); % End timer
+disp(strcat('Tími: ', num2str(klukka_2), 's'));
+
+% copied from Liður 3
+
+
+klukka = tic; % Start timer
+TOL3 = eps;
+t_4 = [0];
+n = 4;
+lengdir_gef_n = 0;
+for tikk = 1:n
+    t_4(tikk+1) = find_t_marked(tikk/n, qx_der1_handle, qy_der1_handle, t, T, TOL3, 1);
+    lengdir_gef_n(tikk) = arc_length(qx_der1_handle, qy_der1_handle,t_4(tikk),t_4(tikk+1),TOL3);
+end
+disp('Lengdir á milli rauðu punktanna:');
+lengdir_gef_n(:)
+
+t_20 = [0];
+n = 20;
+for tikk = 1:n
+    t_20(tikk+1) = find_t_marked(tikk/n, qx_der1_handle, qy_der1_handle, t, T, TOL3, 1);
+    lengdir_gef_n(tikk) = arc_length(qx_der1_handle, qy_der1_handle,t_20(tikk),t_20(tikk+1),TOL3);
+end
+disp('Lengdir á milli grænu punktanna:');
+lengdir_gef_n(:)
+
+timi = linspace(0,1,10000);
+
+figurecounter=figurecounter+1;
+figure(figurecounter);
+clf;
+hold on
+plot(Q_x(timi),Q_y(timi))
+plot(Q_x(t_4),Q_y(t_4),'*r')
+plot(Q_x(t_20),Q_y(t_20),'*r','color','g')
+plot(Q_x(t_4),Q_y(t_4),'*r')
+text(Q_x(timi(1)),Q_y(timi(1))-.05,'t = 0')
+hold off
+
+klukka_3 = toc(klukka); % End timer
+disp(strcat('Tími: ', num2str(klukka_3), 's'));
+
+% copied from Liður 5
+
+
+h=0.01  %skrefastærð
+
+  % Animation with default speed
+Q_x_handle = @(b) Q_x(b);
+Q_y_handle = @(b) Q_y(b);
+figurecounter=figurecounter+1
+animatecurve(Q_x_handle,Q_y_handle,0,s,h,figurecounter,2);
+  
+cla
+  % Animation with constant speed
+Q_x_const = @(b) Q_x(find_t_marked(b, qx_der1_handle, qy_der1_handle, 0, 1, TOL, 1))
+Q_y_const = @(b) Q_y(find_t_marked(b, qx_der1_handle, qy_der1_handle, 0, 1, TOL, 1))
+figurecounter=figurecounter+1
+pause(0.2);
+animatecurve(Q_x_const,Q_y_const,0,s,h,figurecounter,2);
 
 
 %Liður 7
@@ -173,22 +245,22 @@ h=0.01  %skrefastærð
 figurecounter=figurecounter+1;
 x_7l1=@(b) b;
 y_7l1=@(b) b.^(1/3);
-animatecurve(x_7l1,y_7l1,0,1,h,figurecounter)
+animatecurve(x_7l1,y_7l1,0,1,h,figurecounter,1)
 
 %TEIKNAR C(s)=s^2
 figurecounter=figurecounter+1;
 x_7l2=@(b) b;
 y_7l2=@(b) b.^(2);
-animatecurve(x_7l2,y_7l2,0,1,h,figurecounter)
+animatecurve(x_7l2,y_7l2,0,1,h,figurecounter,1)
 
 %TEIKNAR C(s)=sin(s*pi/2)
 figurecounter=figurecounter+1;
 x_7l3=@(b) b;
 y_7l3=@(b) sin((b.*pi)/2);
-animatecurve(x_7l3,y_7l3,0,1,h,figurecounter)
+animatecurve(x_7l3,y_7l3,0,1,h,figurecounter,1)
 
 %TEIKNAR C(s)=1/2+(1/2)*(sin((2s-1)*pi/2)
 figurecounter=figurecounter+1;
 x_7l4=@(b) b;
 y_7l4=@(b) 1/2+(1/2)*sin(((2*b)-1)*pi/2);
-animatecurve(x_7l4,y_7l4,0,1,h,figurecounter)
+animatecurve(x_7l4,y_7l4,0,1,h,figurecounter,1)
