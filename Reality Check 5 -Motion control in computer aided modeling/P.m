@@ -1,1 +1,1 @@
-% Functino P which is the Bézier curve used in this reality checkfunction [x,y] = P(t)  x = x(t);  y = y(t);end % Function
+% Functino P which is the Bézier curve used in this reality checkfunction [x,y] = P(t)  x = P_x(t);  y = P_y(t);end % Function
